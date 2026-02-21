@@ -14,8 +14,14 @@ Toy example for Robust PCA and Distributional Shift.
 - Rcpp
 - RcppArmadillo
 
-## How to run
+## How to Run
 
-```r
-source("R/DsubLTS.R")
-source("R/NonasymptoticDistributionalShift.final.R")
+1. Clone the repository:
+
+git clone https://github.com/HolgerCevallos/toy-example.git
+
+2. Open R or RStudio and set the working directory to the project folder.
+
+3. Run the main script:
+
+source("toy.example.R")
