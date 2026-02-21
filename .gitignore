@@ -1,0 +1,15 @@
+# Archivos de R
+.Rhistory
+.RData
+.Rproj.user/
+*.Rproj
+
+# Archivos compilados C++
+*.o
+*.so
+*.dll
+*.exe
+
+# Archivos temporales
+*.log
+*.aux
