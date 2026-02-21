@@ -174,4 +174,4 @@ source("toy.example.R")
 
 This script compiles the C++ code, generates the synthetic data, and
 applies the conformal prediction method automatically.
->>>>>>> 75b0189 (Add reproducible analysis results)
+
