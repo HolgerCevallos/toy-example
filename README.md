@@ -1,4 +1,5 @@
-# Toy Example -- Nonasymptotic Distributional Shift
+# Toy Example: Distributional Shift and Jackknife Conformal Methods
+
 
 ## Overview
 
