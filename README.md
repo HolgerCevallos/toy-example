@@ -3,11 +3,10 @@
 
 ## Overview
 
-This repository reproduces a toy simulation illustrating two conformal prediction methods for functional data:
+This repository reproduces a toy simulation illustrating two conformal prediction methods for functional data. Both approaches are combined with a robust PCA procedure (DsubLTS) for dimensionality reduction:
 
 - Nonasymptotic Distributional Shift  
 - Jackknife-based conformal prediction
-Both approaches are combined with a robust PCA procedure (DsubLTS) for dimensionality reduction.
 ------------------------------------------------------------------------
 
 ## Load Required Libraries
