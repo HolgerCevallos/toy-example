@@ -9,17 +9,19 @@ library(mgcv)
 library(EasyMMD)
 
 # You need to load the following ".cpp" files to implement the robust DsubLTS algorithm:
-sourceCpp('MyPcs.cpp')
-sourceCpp('MyPcs2.cpp')
-sourceCpp('MyclassicalPcs.v2.cpp')
+sourceCpp('src/MyPcs.cpp')
+sourceCpp('src/MyPcs2.cpp')
+sourceCpp('src/MyclassicalPcs.v2.cpp')
 
 # R code to implement the DsubLTS algorithm (robust PCA)
-source("DsubLTS.R")
+source("R/DsubLTS.R")
 
 # R code to implement the Nonasymptotic Distributional Shift conformal method
-source("NonasymptoticDistributionalShift.final.R")
-source("Jackknife.calib.final.R")
-source("Jackknife.pred.final.R")
+source("R/NonasymptoticDistributionalShift.final.R")
+
+## R code to implement the Jackknife method
+source("R/Jackknife.calib.final.R")
+source("R/Jackknife.pred.final.R")
 
 ###########################################################
 # Design 1
