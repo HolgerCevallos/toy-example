@@ -1,5 +1,7 @@
-library(mgcv)
-library(EasyMMD)
+#########################################################################################################
+# Nonasymptotic Distributional Shift Conformal method 
+#########################################################################################################
+# Arguments:
 
 # x: A list of subjects, where each element is a matrix whose rows contain the observed trajectories for a given subject.
 # mesh: grid points at which the B-spline basis is evaluated.
@@ -7,7 +9,11 @@ library(EasyMMD)
 # q: chosen dimension of the functional PCA
 # indexTargetSubject: index of the element in x corresponding to the target subject.
 # alpha: miscoverage level of the prediction region. Thus, (1 - alpha) is the nominal coverage level.
-#####################################################################################
+
+#########################################################################################################
+
+library(mgcv)
+library(EasyMMD)
 
 DistributionalShift.fun <- function(x,
                                     mesh, dimension.Bspline,
@@ -60,7 +66,7 @@ for (subject in 1:n.subjects) {
   p <- ncol(y)
   
   # Centering projection data based on estimated center from DsubLTS algorithm
-  y.DsubLTS <- DsubLTS(x=y, q=q, alpha=0.5, scale=FALSE)
+  y.DsubLTS <- DsubLTS(x=y, q=q, alpha=alpha, scale=FALSE)
   mu.y.DsubLTS <- y.DsubLTS$mu # Extracting estimated center
   ycc <- y - matrix(mu.y.DsubLTS, nrow = n, ncol = p, byrow = TRUE) # Robust centering
   list.scores.todos[[subject]] <- ycc
@@ -120,7 +126,7 @@ p <- ncol(y.sin.indexTargetSubject)
 
 # Variance estimation for the standardization of residuals
 var.explained <- sapply(1:p, function(k) {
-  y.DsubLTS <- DsubLTS(x = y.sin.indexTargetSubject, q = k, alpha = 0.5, scale=FALSE)
+  y.DsubLTS <- DsubLTS(x = y.sin.indexTargetSubject, q = k, alpha = alpha, scale=FALSE)
   mu.y.DsubLTS <- y.DsubLTS$mu
   yc <- y.sin.indexTargetSubject - matrix(mu.y.DsubLTS, nrow = n, ncol = p, byrow = TRUE)
   bon <- y.DsubLTS$B
@@ -138,7 +144,7 @@ pesos <- pmax(0, c(var.explained[1], diff(var.explained)))
 pesos <- pesos / sum(pesos)
 
 # Calibration using robust PCA (DsubLTS algorithm)
-fit.DsubLTS <- DsubLTS(x = y.sin.indexTargetSubject, q = q, alpha = 0.5, scale=FALSE)
+fit.DsubLTS <- DsubLTS(x = y.sin.indexTargetSubject, q = q, alpha = alpha, scale=FALSE)
 yc <- y.sin.indexTargetSubject - matrix(fit.DsubLTS$mu, nrow = n, ncol = p, byrow = TRUE)
 bon <- fit.DsubLTS$B
 DsubLTS.prediction <- ((yc %*% bon) %*% t(bon)) + 
@@ -204,12 +210,12 @@ resid.y.new.pred <- sqrt(rowSums(((y.nuevo - y.new.rulo.DsubLTS)^2) *
   index.good.new.curves <- which(resid.y.new.pred <= cuantil)
   
 # Computing empirical coverage
-cobertura.new.y <- length(index.good.new.curves)/n.y.nuevo
+coverage.new.y <- length(index.good.new.curves)/n.y.nuevo
 
 return(list(
   quantile = cuantil,
   predictionRegionIndices = index.good.new.curves,
-  predictionRegionCurves = y.nuevo[index.good.new.curves, , drop = FALSE],
-  coverage = cobertura.new.y
+  predictionRegionCurves = x[[indexTargetSubject]][index.good.new.curves, , drop = FALSE],
+  coverage = coverage.new.y
 ))
 }
