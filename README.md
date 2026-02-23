@@ -294,15 +294,6 @@ fit.pooled.method$coverage
 
 ------------------------------------------------------------------------
 
-# Comparison
-
-  Method                 Quantile   Selected   Coverage
-  ---------------------- ---------- ---------- ----------
-  Distributional Shift   0.7313     26 / 50    0.52
-  Jackknife              0.8051     3 / 50     0.06
-
-------------------------------------------------------------------------
-
 # Reproducibility
 
 To reproduce the full analysis locally:
