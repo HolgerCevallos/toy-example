@@ -54,7 +54,7 @@ source("R/Jackknife.pred.final.R")
 ------------------------------------------------------------------------
 
 # Design 1
-
+``` r
 lambda.k1.values <- function(k){
   lambda.k1 <- 0.5^(k-1)
   return(lambda.k1)
@@ -90,13 +90,13 @@ phil2.values <- function(t){
                 sqrt(2)*cos(8*pi*t))
   return(phil2)
 }
-
+```
 
 # Data generation of calibration set
 
 # Calibration set:
 # 5 subjects, 50 curves are generated per subject at 21 time points
-
+``` r
 Npatients <- 5 #número de pacientes
 Yij.todos <- vector("list", Npatients) 
 
@@ -140,7 +140,7 @@ for (s in 1:Npatients){
   }
   Yij.todos[[s]] <- Yij
 }
-
+```
 
 ------------------------------------------------------------------------
 
